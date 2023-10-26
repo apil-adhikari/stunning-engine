@@ -43,6 +43,15 @@ const init = async () => {
 
 init();
 
+// Async / Await with fetch
+const fetchUsers = async () => {
+  const res = await fetch("https://jsonplaceholder.typicode.com/users");
+  const data = await res.json();
+  console.log(data);
+};
+
+fetchUsers();
+
 // Promise.all()
 // const promise1 = Promise.resolve("Hello world");
 // const promise2 = 10;
