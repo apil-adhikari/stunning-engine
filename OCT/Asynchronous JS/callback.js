@@ -13,17 +13,14 @@ const getPosts = () => {
   }, 1000);
 };
 
-// post is pushed after 2 seconds
-const createPost = (post) => {
+// createPost() takes 2 seconds to push the post, so we should have some way to hold until createPost() finishes its job then run the getPosts() to get all posts. We do this by passing a callback function as an argument to the createPost() and calling it inside the function itself [i.e. Callback Function: a function calling itself]
+const createPost = (post, callback) => {
   setTimeout(() => {
     posts.push(post);
+    // calling callback()
+    callback();
   }, 2000);
 };
 
-getPosts();
-
-// calling createPost()
-createPost({ title: "Post three", body: "This is post three." });
-
-// Only 2 posts are shown in list as createPost() takes 2 seconds to run but getPosts() finishes displaying each post in 1 second.
-// [To avoid this from happening, we use asynchronous way.]
+//calling createPost() and passing required arguments as well as getPosts() as parameter to createPost() so getPost() will be called as soon as createPost() push work has beed done.
+createPost({ title: "Post three", body: "This is post three." }, getPosts);
